@@ -5,8 +5,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        home: resolve(__dirname, "src/home/index.html"),
-        about: resolve(__dirname, "src/about/index.html"),
+        lines: resolve(__dirname, "src/lines/index.html"),
+        particles: resolve(__dirname, "src/particles/index.html"),
       },
       output: {
         assetFileNames: "assets/[name].[hash].[ext]",
