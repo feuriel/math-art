@@ -16,7 +16,7 @@ canvasctx.strokeStyle = "red";
 canvasctx.lineWidth = 0.5;
 canvasctx.fillStyle = "black";
 canvasctx.fillRect(0, 0, canvas.width, canvas.height);
-drawCircle({ x: 300, y: 200 }, 180, canvasctx);
+drawCircle({ x: 300, y: 200 }, 300, canvasctx);
 
 //canvasctx.stroke();
 
