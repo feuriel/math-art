@@ -48,5 +48,19 @@ export function pointsOnCircle(circle, numberOfPoints) {
 export const shuffleArray = (array) =>
   [...array].sort(() => Math.random() - 0.5);
 
+export function downloadCanvasImage(canvas) {
+  const fileName =
+    prompt(
+      "Enter file name (without extension):",
+      `artwork-${new Date().toISOString().slice(0, 10)}`
+    ) || `artwork-${new Date().toISOString().slice(0, 10)}`;
+
+  const link = document.createElement("a");
+  link.download = `${fileName}.png`;
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+  link.remove();
+}
+
 // You can export multiple utilities
 export const version = "1.0.0";

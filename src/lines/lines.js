@@ -1,19 +1,19 @@
 import {
-  sharedFunction,
   drawLine,
   drawCircle,
   setupCanvas,
   pointsOnCircle,
   shuffleArray,
+  downloadCanvasImage,
 } from "../shared/utils.js";
 
 const canvas = document.getElementById("lines-canvas");
 const container = document.getElementById("lines-container");
-
 const canvasctx = canvas.getContext("2d");
 setupCanvas(container, canvas, canvasctx);
+
 canvasctx.strokeStyle = "white";
-canvasctx.lineWidth = 0.25;
+canvasctx.lineWidth = 0.35;
 canvasctx.fillStyle = "black";
 canvasctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -22,18 +22,23 @@ const middleX = canvas.width / 2;
 const middleY = canvas.height / 2;
 const heightWidthMax = Math.max(canvas.height, canvas.width);
 
-const NB_CIRCLE_PER_QUARTER = 3;
-const NB_POINTS_PER_CIRLCE = 200;
-const DELAY_BETWEEN_LINES_MS = 150; // 50ms between lines (adjust as needed)
+const NB_CIRCLE_PER_QUARTER = 8;
+const NB_POINTS_PER_CIRLCE = 360;
+const DELAY_BETWEEN_LINES_MS = 5; // Adjust for speed of animation (lower = faster)
+
+// params
+let showCircle = true;
 
 let circles = [];
 //top left
 for (let i = 0; i < NB_CIRCLE_PER_QUARTER; i++) {
   const centerX = Math.floor(Math.random() * middleX);
   const centerY = Math.floor(Math.random() * middleY);
-  const radius = Math.floor((Math.random() * heightWidthMax) / 2);
+  const radius = Math.max(
+    heightWidthMax / 15,
+    Math.floor((Math.random() * heightWidthMax) / 2)
+  );
   circles.push({ x: centerX, y: centerY, radius });
-  drawCircle({ x: centerX, y: centerY }, radius, canvasctx);
 }
 
 //bottom right
@@ -41,41 +46,77 @@ for (let i = 0; i < NB_CIRCLE_PER_QUARTER; i++) {
   const centerX = middleX + Math.floor(Math.random() * middleX);
   const centerY = middleY + Math.floor(Math.random() * middleY);
   const radius = Math.max(
-    heightWidthMax / 8,
+    heightWidthMax / 15,
     Math.floor((Math.random() * heightWidthMax) / 2)
   );
   circles.push({ x: centerX, y: centerY, radius });
-  drawCircle({ x: centerX, y: centerY }, radius, canvasctx);
 }
-
+circles = shuffleArray(circles);
 let points = [];
 for (let i = 0; i < circles.length; i++) {
   let pointsForCurrentCircle = [];
   pointsForCurrentCircle = pointsOnCircle(circles[i], NB_POINTS_PER_CIRLCE);
   pointsForCurrentCircle = shuffleArray(pointsForCurrentCircle);
-  points.push(pointsForCurrentCircle);
+  points.push(...pointsForCurrentCircle);
 }
-points = pointsOnCircle(circles[0], NB_POINTS_PER_CIRLCE);
-points = shuffleArray(points);
-console.log(points);
+
 // animate lines
+let animationFrameId = null;
 let currentIndex = 0;
-function drawNextLine() {
-  if (currentIndex >= NB_POINTS_PER_CIRLCE / 2) {
-    console.log("Animation complete!");
-    return;
+let lastTimestamp = 0;
+function drawNextLine(timestamp) {
+  // Initialize lastTimestamp if first run
+  if (!lastTimestamp) {
+    lastTimestamp = timestamp;
   }
+  // Calculate time elapsed since last line was drawn
+  const elapsed = timestamp - lastTimestamp;
 
-  drawLine(
-    points[currentIndex],
-    points[currentIndex + NB_POINTS_PER_CIRLCE / 2],
-    canvasctx
-  );
-  currentIndex++;
+  // Only draw if enough time has passed
+  if (elapsed >= DELAY_BETWEEN_LINES_MS) {
+    if (currentIndex >= NB_POINTS_PER_CIRLCE * circles.length) {
+      stopAnimation();
+      console.log("Animation complete!");
+      return;
+    }
 
-  // Schedule next line
-  setTimeout(drawNextLine, DELAY_BETWEEN_LINES_MS);
+    drawLine(points[currentIndex], points[currentIndex + 1], canvasctx);
+    currentIndex += 2;
+    lastTimestamp = timestamp;
+  }
+  animationFrameId = requestAnimationFrame(drawNextLine);
 }
 
-// Start the animation
-drawNextLine();
+function startAnimation() {
+  if (showCircle) {
+    circles.forEach((circle) => {
+      drawCircle({ x: circle.x, y: circle.y }, circle.radius, canvasctx);
+    });
+  }
+  if (!animationFrameId) {
+    animationFrameId = requestAnimationFrame(drawNextLine);
+  }
+}
+
+function stopAnimation() {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+}
+
+startAnimation();
+
+document.getElementById("startBtn")?.addEventListener("click", startAnimation);
+document.getElementById("stopBtn")?.addEventListener("click", stopAnimation);
+document.getElementById("resetBtn")?.addEventListener("click", () => {
+  stopAnimation();
+  // Clear canvas and reset variables
+  canvasctx.clearRect(0, 0, canvas.width, canvas.height);
+  canvasctx.fillRect(0, 0, canvas.width, canvas.height);
+  currentIndex = 0;
+  lastTimestamp = 0;
+});
+document
+  .getElementById("downloadBtn")
+  ?.addEventListener("click", () => downloadCanvasImage(canvas));
