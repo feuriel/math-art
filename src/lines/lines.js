@@ -35,7 +35,7 @@ for (let i = 0; i < NB_CIRCLE_PER_QUARTER; i++) {
   const centerX = Math.floor(Math.random() * middleX);
   const centerY = Math.floor(Math.random() * middleY);
   const radius = Math.max(
-    heightWidthMax / 15,
+    heightWidthMax / 30,
     Math.floor((Math.random() * heightWidthMax) / 2)
   );
   circles.push({ x: centerX, y: centerY, radius });
@@ -46,7 +46,7 @@ for (let i = 0; i < NB_CIRCLE_PER_QUARTER; i++) {
   const centerX = middleX + Math.floor(Math.random() * middleX);
   const centerY = middleY + Math.floor(Math.random() * middleY);
   const radius = Math.max(
-    heightWidthMax / 15,
+    heightWidthMax / 30,
     Math.floor((Math.random() * heightWidthMax) / 2)
   );
   circles.push({ x: centerX, y: centerY, radius });
