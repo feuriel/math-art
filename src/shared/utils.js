@@ -45,5 +45,8 @@ export function pointsOnCircle(circle, numberOfPoints) {
   return points;
 }
 
+export const shuffleArray = (array) =>
+  [...array].sort(() => Math.random() - 0.5);
+
 // You can export multiple utilities
 export const version = "1.0.0";
