@@ -107,9 +107,13 @@ function stopAnimation() {
 
 startAnimation();
 
-document.getElementById("startBtn")?.addEventListener("click", startAnimation);
-document.getElementById("stopBtn")?.addEventListener("click", stopAnimation);
-document.getElementById("resetBtn")?.addEventListener("click", () => {
+document
+  .getElementById("anim-start-btn")
+  ?.addEventListener("click", startAnimation);
+document
+  .getElementById("anim-stop-btn")
+  ?.addEventListener("click", stopAnimation);
+document.getElementById("anim-reset-btn")?.addEventListener("click", () => {
   stopAnimation();
   // Clear canvas and reset variables
   canvasctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -118,5 +122,5 @@ document.getElementById("resetBtn")?.addEventListener("click", () => {
   lastTimestamp = 0;
 });
 document
-  .getElementById("downloadBtn")
+  .getElementById("anim-download-btn")
   ?.addEventListener("click", () => downloadCanvasImage(canvas));
