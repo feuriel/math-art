@@ -147,7 +147,7 @@ document.getElementById("info-btn")?.addEventListener("click", () => {
 });
 
 let additionalText =
-  new Date().getFullYear() === 2024 ? "" : `-${new Date().getFullYear()}`;
+  new Date().getFullYear() === 2025 ? "" : `-${new Date().getFullYear()}`;
 document.getElementById(
   "info-copyright"
 ).innerText = `© 2025${additionalText} Gabriel S.`;
