@@ -5,8 +5,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        lines: resolve(__dirname, "src/lines/index.html"),
-        particles: resolve(__dirname, "src/particles/index.html"),
+        lines: resolve(__dirname, "art/lines/index.html"),
+        particles: resolve(__dirname, "art/particles/index.html"),
       },
       output: {
         assetFileNames: "assets/[name].[hash].[ext]",
@@ -15,6 +15,6 @@ export default defineConfig({
     },
   },
   server: {
-    open: "/src/home/index.html",
+    open: "art/lines/",
   },
 });
