@@ -11,6 +11,7 @@ const canvas = document.getElementById("lines-canvas");
 const container = document.getElementById("lines-container");
 const canvasctx = canvas.getContext("2d");
 const controllerContainer = document.getElementById("canvas-controller");
+const infoContainer = document.getElementById("info-container");
 setupCanvas(container, canvas, canvasctx);
 
 canvasctx.strokeStyle = "white";
@@ -136,4 +137,17 @@ canvas.addEventListener("click", (event) => {
     controllerContainer.style.visibility = "hidden";
     controllerContainer.style.opacity = "0";
   }
+  infoContainer.style.visibility = "hidden";
+  infoContainer.style.opacity = "0";
 });
+
+document.getElementById("info-btn")?.addEventListener("click", () => {
+  infoContainer.style.visibility = "visible";
+  infoContainer.style.opacity = "1";
+});
+
+let additionalText =
+  new Date().getFullYear() === 2024 ? "" : `-${new Date().getFullYear()}`;
+document.getElementById(
+  "info-copyright"
+).innerText = `© 2025${additionalText} Gabriel S.`;
