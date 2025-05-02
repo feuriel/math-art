@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         lines: resolve(__dirname, "art/lines/index.html"),
         particles: resolve(__dirname, "art/particles/index.html"),
+        home: resolve(__dirname, "art/index.html"),
       },
       output: {
         assetFileNames: "assets/[name].[hash].[ext]",
