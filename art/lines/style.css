@@ -29,6 +29,7 @@ body {
   height: 98dvh;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 canvas {
   height: 100%;

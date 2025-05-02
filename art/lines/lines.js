@@ -10,6 +10,7 @@ import {
 const canvas = document.getElementById("lines-canvas");
 const container = document.getElementById("lines-container");
 const canvasctx = canvas.getContext("2d");
+const controllerContainer = document.getElementById("canvas-controller");
 setupCanvas(container, canvas, canvasctx);
 
 canvasctx.strokeStyle = "white";
@@ -124,3 +125,15 @@ document.getElementById("anim-reset-btn")?.addEventListener("click", () => {
 document
   .getElementById("anim-download-btn")
   ?.addEventListener("click", () => downloadCanvasImage(canvas));
+
+let controlVisible = false;
+canvas.addEventListener("click", (event) => {
+  controlVisible = !controlVisible;
+  if (controlVisible) {
+    controllerContainer.style.visibility = "visible";
+    controllerContainer.style.opacity = "1";
+  } else {
+    controllerContainer.style.visibility = "hidden";
+    controllerContainer.style.opacity = "0";
+  }
+});

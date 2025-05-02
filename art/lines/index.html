@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Circle of Lines</title>
     <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./controller.css" />
+    <link rel="stylesheet" href="../shared/controller.css" />
     <link rel="icon" type="image/png" href="../shared/assets/riel.jpg" />
   </head>
   <body>
     <div id="lines-container" class="lines-container">
       <canvas id="lines-canvas"></canvas>
+      <div id="canvas-controller" class="canvas-controller">
+        <button id="anim-start-btn">Start</button>
+        <button id="anim-stop-btn">Stop</button>
+        <button id="anim-reset-btn">Reset</button>
+        <button id="anim-download-btn">Save as Image</button>
+      </div>
     </div>
-    <div id="canvas-controller" class="canvas-controller">
-      <button id="anim-start-btn">Start</button>
-      <button id="anim-stop-btn">Stop</button>
-      <button id="anim-reset-btn">Reset</button>
-      <button id="anim-download-btn">Save as Image</button>
-    </div>
+
     <!-- <div>some other content below the fold</div> -->
     <script type="module" src="./lines.js"></script>
   </body>
