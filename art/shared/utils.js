@@ -22,7 +22,7 @@ export function setupCanvas(container, canvas, ctx) {
   const containerHeight = container.clientHeight;
 
   // Handle high DPI displays
-  const dpr = window.devicePixelRatio || 1;
+  const dpr = 1; //window.devicePixelRatio || 1;
   canvas.width = containerWidth * dpr;
   canvas.height = containerHeight * dpr;
 
