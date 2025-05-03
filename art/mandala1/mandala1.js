@@ -4,17 +4,18 @@ import {
   setupCanvas,
   pointsOnCircle,
   shuffleArray,
-  downloadCanvasImage,
-  setCallbacks,
 } from "../shared/utils.js";
+import {
+  downloadCanvasImage,
+  setContentInfo,
+  setMenuCallbacks,
+} from "../shared/controls.js";
 
-const TITLE = "mandala1";
-const canvas = document.getElementById(`${TITLE}-canvas}`);
-const container = document.getElementById(`${TITLE}-container`);
+const TITLE = "Inner Circle Focus (mandala1)";
+
+const canvas = document.getElementById("mandala1-canvas");
+const container = document.getElementById("canvas-container");
 const canvasctx = canvas.getContext("2d");
-
-const controllerContainer = document.getElementById("canvas-controller");
-const infoContainer = document.getElementById("info-container");
 setupCanvas(container, canvas, canvasctx);
 
 canvasctx.strokeStyle = "white";
@@ -22,54 +23,16 @@ canvasctx.lineWidth = 0.35;
 canvasctx.fillStyle = "black";
 canvasctx.fillRect(0, 0, canvas.width, canvas.height);
 
-// 2 circles per quarter
+//params
 const middleX = canvas.width / 2;
 const middleY = canvas.height / 2;
 const heightWidthMax = Math.max(canvas.height, canvas.width);
 
-const NB_CIRCLE_PER_QUARTER = 8;
-const NB_POINTS_PER_CIRLCE = 360;
-const DELAY_BETWEEN_LINES_MS = 35; // Adjust for speed of animation (lower = faster)
-
-// params
-let showCircle = false;
-
-let circles = [];
-//top left
-for (let i = 0; i < NB_CIRCLE_PER_QUARTER; i++) {
-  const centerX = Math.floor(Math.random() * middleX);
-  const centerY = Math.floor(Math.random() * middleY);
-  const radius = Math.max(
-    heightWidthMax / 30,
-    Math.floor((Math.random() * heightWidthMax) / 2)
-  );
-  circles.push({ x: centerX, y: centerY, radius });
-}
-
-//bottom right
-for (let i = 0; i < NB_CIRCLE_PER_QUARTER; i++) {
-  const centerX = middleX + Math.floor(Math.random() * middleX);
-  const centerY = middleY + Math.floor(Math.random() * middleY);
-  const radius = Math.max(
-    heightWidthMax / 30,
-    Math.floor((Math.random() * heightWidthMax) / 2)
-  );
-  circles.push({ x: centerX, y: centerY, radius });
-}
-circles = shuffleArray(circles);
-let points = [];
-for (let i = 0; i < circles.length; i++) {
-  let pointsForCurrentCircle = [];
-  pointsForCurrentCircle = pointsOnCircle(circles[i], NB_POINTS_PER_CIRLCE);
-  pointsForCurrentCircle = shuffleArray(pointsForCurrentCircle);
-  points.push(...pointsForCurrentCircle);
-}
-
-// animate lines
+// animate
 let animationFrameId = null;
 let currentIndex = 0;
 let lastTimestamp = 0;
-function drawNextLine(timestamp) {
+function drawNext(timestamp) {
   // Initialize lastTimestamp if first run
   if (!lastTimestamp) {
     lastTimestamp = timestamp;
@@ -84,24 +47,13 @@ function drawNextLine(timestamp) {
       console.log("Animation complete!");
       return;
     }
-
-    drawLine(points[currentIndex], points[currentIndex + 1], canvasctx);
-    currentIndex += 2;
-    lastTimestamp = timestamp;
   }
-  animationFrameId = requestAnimationFrame(drawNextLine);
+  currentIndex++;
+  lastTimestamp = timestamp;
+  animationFrameId = requestAnimationFrame(drawNext);
 }
 
-function startAnimation() {
-  if (showCircle) {
-    circles.forEach((circle) => {
-      drawCircle({ x: circle.x, y: circle.y }, circle.radius, canvasctx);
-    });
-  }
-  if (!animationFrameId) {
-    animationFrameId = requestAnimationFrame(drawNextLine);
-  }
-}
+function startAnimation() {}
 
 function stopAnimation() {
   if (animationFrameId) {
@@ -120,45 +72,15 @@ function resetAnimation() {
 }
 
 const saveCanvasImage = () => {
-  return downloadCanvasImage(canvas);
+  return downloadCanvasImage(canvas, TITLE);
 };
-
 startAnimation();
 
-document
-  .getElementById("anim-start-btn")
-  ?.addEventListener("click", startAnimation);
-document
-  .getElementById("anim-stop-btn")
-  ?.addEventListener("click", stopAnimation);
-document.getElementById("anim-reset-btn")?.addEventListener("click", () => {
-  resetAnimation();
-});
-document
-  .getElementById("anim-download-btn")
-  ?.addEventListener("click", saveCanvasImage);
-
-let controlVisible = false;
-canvas.addEventListener("click", (event) => {
-  controlVisible = !controlVisible;
-  if (controlVisible) {
-    controllerContainer.style.display = "flex";
-    controllerContainer.style.opacity = "1";
-  } else {
-    controllerContainer.style.display = "none";
-    controllerContainer.style.opacity = "0";
-  }
-  infoContainer.style.display = "none";
-  infoContainer.style.opacity = "0";
-});
-
-document.getElementById("info-btn")?.addEventListener("click", () => {
-  infoContainer.style.display = "flex";
-  infoContainer.style.opacity = "1";
-});
-
-let additionalText =
-  new Date().getFullYear() === 2025 ? "" : `-${new Date().getFullYear()}`;
-document.getElementById(
-  "info-copyright"
-).innerText = `© 2025${additionalText} Gabriel S.`;
+setContentInfo(container, TITLE);
+setMenuCallbacks(
+  startAnimation,
+  stopAnimation,
+  resetAnimation,
+  saveCanvasImage,
+  canvas
+);

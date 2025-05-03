@@ -36,6 +36,15 @@ body {
   }
 }
 
+#canvas-container {
+  width: 100%;
+  max-width: 1280px;
+  height: 98dvh;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
 .canvas-controller {
   position: absolute;
   top: 0;
