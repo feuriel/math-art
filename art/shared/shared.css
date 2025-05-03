@@ -40,7 +40,7 @@ body {
   position: absolute;
   top: 0;
   left: 5%;
-  display: flex;
+  display: none;
   align-items: stretch;
   flex-direction: column;
   gap: 1rem;
@@ -48,7 +48,6 @@ body {
   transform: translateY(-50%) translateX(0);
   transition: opacity 0.3s linear;
   opacity: 0;
-  visibility: hidden;
 }
 
 .canvas-controller button {
@@ -60,7 +59,7 @@ canvas {
 }
 
 #info-container {
-  display: flex;
+  display: none;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -68,9 +67,9 @@ canvas {
   position: absolute;
   background-color: #1a1a1a;
   padding: 2rem;
-  visibility: hidden;
   opacity: 0;
   border-radius: 5px;
+  transition: opacity 0.3s linear;
 }
 
 button {

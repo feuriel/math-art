@@ -142,18 +142,18 @@ let controlVisible = false;
 canvas.addEventListener("click", (event) => {
   controlVisible = !controlVisible;
   if (controlVisible) {
-    controllerContainer.style.visibility = "visible";
+    controllerContainer.style.display = "flex";
     controllerContainer.style.opacity = "1";
   } else {
-    controllerContainer.style.visibility = "hidden";
+    controllerContainer.style.display = "none";
     controllerContainer.style.opacity = "0";
   }
-  infoContainer.style.visibility = "hidden";
+  infoContainer.style.display = "none";
   infoContainer.style.opacity = "0";
 });
 
 document.getElementById("info-btn")?.addEventListener("click", () => {
-  infoContainer.style.visibility = "visible";
+  infoContainer.style.display = "flex";
   infoContainer.style.opacity = "1";
 });
 
