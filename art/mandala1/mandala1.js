@@ -5,12 +5,14 @@ import {
   pointsOnCircle,
   shuffleArray,
   downloadCanvasImage,
+  setCallbacks,
 } from "../shared/utils.js";
 
 const TITLE = "mandala1";
 const canvas = document.getElementById(`${TITLE}-canvas}`);
-const container = document.getElementById("lines-container");
+const container = document.getElementById(`${TITLE}-container`);
 const canvasctx = canvas.getContext("2d");
+
 const controllerContainer = document.getElementById("canvas-controller");
 const infoContainer = document.getElementById("info-container");
 setupCanvas(container, canvas, canvasctx);
@@ -108,6 +110,19 @@ function stopAnimation() {
   }
 }
 
+function resetAnimation() {
+  stopAnimation();
+  // Clear canvas and reset variables
+  canvasctx.clearRect(0, 0, canvas.width, canvas.height);
+  canvasctx.fillRect(0, 0, canvas.width, canvas.height);
+  currentIndex = 0;
+  lastTimestamp = 0;
+}
+
+const saveCanvasImage = () => {
+  return downloadCanvasImage(canvas);
+};
+
 startAnimation();
 
 document
@@ -117,16 +132,11 @@ document
   .getElementById("anim-stop-btn")
   ?.addEventListener("click", stopAnimation);
 document.getElementById("anim-reset-btn")?.addEventListener("click", () => {
-  stopAnimation();
-  // Clear canvas and reset variables
-  canvasctx.clearRect(0, 0, canvas.width, canvas.height);
-  canvasctx.fillRect(0, 0, canvas.width, canvas.height);
-  currentIndex = 0;
-  lastTimestamp = 0;
+  resetAnimation();
 });
 document
   .getElementById("anim-download-btn")
-  ?.addEventListener("click", () => downloadCanvasImage(canvas));
+  ?.addEventListener("click", saveCanvasImage);
 
 let controlVisible = false;
 canvas.addEventListener("click", (event) => {

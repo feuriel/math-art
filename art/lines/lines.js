@@ -4,15 +4,19 @@ import {
   setupCanvas,
   pointsOnCircle,
   shuffleArray,
-  downloadCanvasImage,
 } from "../shared/utils.js";
+import {
+  downloadCanvasImage,
+  setContentInfo,
+  setMenuCallbacks,
+} from "../shared/controls.js";
+
+const TITLE = "Circles of Lines";
 
 const canvas = document.getElementById("lines-canvas");
-const container = document.getElementById("lines-container");
+const linesContainer = document.getElementById("lines-container");
 const canvasctx = canvas.getContext("2d");
-const controllerContainer = document.getElementById("canvas-controller");
-const infoContainer = document.getElementById("info-container");
-setupCanvas(container, canvas, canvasctx);
+setupCanvas(linesContainer, canvas, canvasctx);
 
 canvasctx.strokeStyle = "white";
 canvasctx.lineWidth = 0.35;
@@ -107,47 +111,25 @@ function stopAnimation() {
   }
 }
 
-startAnimation();
-
-document
-  .getElementById("anim-start-btn")
-  ?.addEventListener("click", startAnimation);
-document
-  .getElementById("anim-stop-btn")
-  ?.addEventListener("click", stopAnimation);
-document.getElementById("anim-reset-btn")?.addEventListener("click", () => {
+function resetAnimation() {
   stopAnimation();
   // Clear canvas and reset variables
   canvasctx.clearRect(0, 0, canvas.width, canvas.height);
   canvasctx.fillRect(0, 0, canvas.width, canvas.height);
   currentIndex = 0;
   lastTimestamp = 0;
-});
-document
-  .getElementById("anim-download-btn")
-  ?.addEventListener("click", () => downloadCanvasImage(canvas));
+}
 
-let controlVisible = false;
-canvas.addEventListener("click", (event) => {
-  controlVisible = !controlVisible;
-  if (controlVisible) {
-    controllerContainer.style.visibility = "visible";
-    controllerContainer.style.opacity = "1";
-  } else {
-    controllerContainer.style.visibility = "hidden";
-    controllerContainer.style.opacity = "0";
-  }
-  infoContainer.style.visibility = "hidden";
-  infoContainer.style.opacity = "0";
-});
+const saveCanvasImage = () => {
+  return downloadCanvasImage(canvas, TITLE);
+};
+startAnimation();
 
-document.getElementById("info-btn")?.addEventListener("click", () => {
-  infoContainer.style.visibility = "visible";
-  infoContainer.style.opacity = "1";
-});
-
-let additionalText =
-  new Date().getFullYear() === 2025 ? "" : `-${new Date().getFullYear()}`;
-document.getElementById(
-  "info-copyright"
-).innerText = `© 2025${additionalText} Gabriel S.`;
+setContentInfo(linesContainer, TITLE);
+setMenuCallbacks(
+  startAnimation,
+  stopAnimation,
+  resetAnimation,
+  saveCanvasImage,
+  canvas
+);
