@@ -1,10 +1,4 @@
-import {
-  drawLine,
-  drawCircle,
-  setupCanvas,
-  pointsOnCircle,
-  shuffleArray,
-} from "../shared/utils.js";
+import { setupCanvas } from "../shared/utils.js";
 import {
   downloadCanvasImage,
   setContentInfo,
@@ -23,14 +17,8 @@ canvasctx.lineWidth = 0.35;
 canvasctx.fillStyle = "black";
 canvasctx.fillRect(0, 0, canvas.width, canvas.height);
 
-// 2 circles per quarter
-const middleX = canvas.width / 2;
-const middleY = canvas.height / 2;
-const heightWidthMax = Math.max(canvas.height, canvas.width);
-
-const DELAY_BETWEEN_LINES_MS = 35; // Adjust for speed of animation (lower = faster)
-
 // params
+const DELAY_BETWEEN_LINES_MS = 35; // Adjust for speed of animation (lower = faster)
 
 // animate
 let animationFrameId = null;

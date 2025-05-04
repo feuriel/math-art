@@ -30,7 +30,9 @@ const heightWidthMax = Math.max(canvas.height, canvas.width);
 
 const NB_CIRCLE_PER_QUARTER = 8;
 const NB_POINTS_PER_CIRLCE = 360;
-const DELAY_BETWEEN_LINES_MS = 35; // Adjust for speed of animation (lower = faster)
+const DELAY_BETWEEN_LINES_MS = urlParams.get("anim_duration")
+  ? Math.max(urlParams.get("anim_duration"), 10)
+  : 35; // Adjust for speed of animation (lower = faster) // Adjust for speed of animation (lower = faster)
 
 // params
 let showCircle = false;

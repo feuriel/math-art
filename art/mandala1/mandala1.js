@@ -24,7 +24,10 @@ let innerFirst = urlParams.get("innerFirst") === "true" || false;
 let hue = 30; // Start with orange (hue 30)
 const hueIncrement = 0.5; // Adjust this for speed of color change
 const NB_POINTS_PER_CIRLCE = 20;
-const DELAY_BETWEEN_LINES_MS = 35; // Adjust for speed of animation (lower = faster)
+const DELAY_BETWEEN_LINES_MS = urlParams.get("anim_duration")
+  ? Math.max(urlParams.get("anim_duration"), 10)
+  : 35; // Adjust for speed of animation (lower = faster) // Adjust for speed of animation (lower = faster)
+console.log(DELAY_BETWEEN_LINES_MS);
 const middleX = canvas.width / 2;
 const middleY = canvas.height / 2;
 const heightWidthMax = Math.max(canvas.height, canvas.width);
