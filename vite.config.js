@@ -17,6 +17,6 @@ export default defineConfig({
     },
   },
   server: {
-    open: "art/lines/",
+    open: "art/",
   },
 });
