@@ -12,11 +12,11 @@ import {
 } from "../shared/controls.js";
 
 const TITLE = "Circles of Lines";
-
+const urlParams = new URLSearchParams(window.location.search);
 const canvas = document.getElementById("lines-canvas");
 const linesContainer = document.getElementById("canvas-container");
 const canvasctx = canvas.getContext("2d");
-setupCanvas(linesContainer, canvas, canvasctx);
+setupCanvas(linesContainer, canvas, canvasctx, urlParams);
 
 canvasctx.strokeStyle = "white";
 canvasctx.lineWidth = 0.35;
@@ -30,7 +30,7 @@ const heightWidthMax = Math.max(canvas.height, canvas.width);
 
 const NB_CIRCLE_PER_QUARTER = 8;
 const NB_POINTS_PER_CIRLCE = 360;
-const urlParams = new URLSearchParams(window.location.search);
+
 const DELAY_BETWEEN_LINES_MS = urlParams.get("anim_duration")
   ? Math.max(urlParams.get("anim_duration"), 10)
   : 35; // Adjust for speed of animation (lower = faster) // Adjust for speed of animation (lower = faster)

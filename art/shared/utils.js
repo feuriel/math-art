@@ -17,7 +17,11 @@ export function drawCircle(center, radius, canvasctx) {
   canvasctx.closePath();
 }
 
-export function setupCanvas(container, canvas, ctx) {
+export function setupCanvas(container, canvas, ctx, urlParams) {
+  if (urlParams.get("full_screen") == 1) {
+    container.classList.add("full-screen");
+  }
+
   const containerWidth = container.clientWidth;
   const containerHeight = container.clientHeight;
 

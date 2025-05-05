@@ -6,18 +6,16 @@ import {
 } from "../shared/controls.js";
 
 const TITLE = "Inner Circle Focus (mandala1)";
-
+const urlParams = new URLSearchParams(window.location.search);
 const canvas = document.getElementById("mandala1-canvas");
 const container = document.getElementById("canvas-container");
 const canvasctx = canvas.getContext("2d");
-setupCanvas(container, canvas, canvasctx);
+setupCanvas(container, canvas, canvasctx, urlParams);
 
 canvasctx.strokeStyle = "white";
 canvasctx.lineWidth = 0.5;
 canvasctx.fillStyle = "black";
 canvasctx.fillRect(0, 0, canvas.width, canvas.height);
-
-const urlParams = new URLSearchParams(window.location.search);
 
 //params
 let innerFirst = urlParams.get("innerFirst") === "true" || false;

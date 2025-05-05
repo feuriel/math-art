@@ -6,11 +6,12 @@ import {
 } from "../shared/controls.js";
 
 const TITLE = "Particles";
+const urlParams = new URLSearchParams(window.location.search);
 
 const canvas = document.getElementById("particles-canvas");
 const linesContainer = document.getElementById("canvas-container");
 const canvasctx = canvas.getContext("2d");
-setupCanvas(linesContainer, canvas, canvasctx);
+setupCanvas(linesContainer, canvas, canvasctx, urlParams);
 
 canvasctx.strokeStyle = "white";
 canvasctx.lineWidth = 0.35;

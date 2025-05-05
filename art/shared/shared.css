@@ -45,6 +45,10 @@ body {
   position: relative;
 }
 
+.full-screen {
+  max-width: none !important;
+}
+
 .canvas-controller {
   position: absolute;
   top: 0;
@@ -79,6 +83,7 @@ canvas {
   opacity: 0;
   border-radius: 5px;
   transition: opacity 0.3s linear;
+  border: 1px solid white;
 }
 
 button {
