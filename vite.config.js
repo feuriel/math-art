@@ -5,7 +5,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        lines: resolve(__dirname, "art/lines/index.html"),
+        circlesOfLines: resolve(__dirname, "art/circlesOfLines/index.html"),
         particles: resolve(__dirname, "art/particles/index.html"),
         home: resolve(__dirname, "art/index.html"),
         mandala1: resolve(__dirname, "art/mandala1/index.html"),
