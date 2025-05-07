@@ -21,19 +21,7 @@ body {
   /* min-width: 320px; */
   min-height: 100dvh;
   flex-direction: column;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  color: white;
 }
 
 #canvas-container {
@@ -93,6 +81,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
+  color: white;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
