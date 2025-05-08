@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "vite": "^6.3.1"
+  },
+  "dependencies": {
+    "console_font": "^1.0.1"
   }
 }
