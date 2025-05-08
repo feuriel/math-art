@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      console_font:
+        specifier: ^1.0.1
+        version: 1.0.2
     devDependencies:
       vite:
         specifier: ^6.3.1
@@ -267,6 +271,9 @@ packages:
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
 
+  console_font@1.0.2:
+    resolution: {integrity: sha512-ThGcQAzU191lxlpEbfWznutLPQMB+HMuHa+8F2mudc2Qk+ZOvwjVgpOUvPbpfHP1gMM0hXtJl+uCqBy53xQnQw==}
+
   esbuild@0.25.3:
     resolution: {integrity: sha512-qKA6Pvai73+M2FtftpNKRxJ78GIjmFXFxd/1DVBqGo/qNhLSfv+G12n9pNoWdytJC8U00TrViOwpjT0zgqQS8Q==}
     engines: {node: '>=18'}
@@ -492,6 +499,8 @@ snapshots:
     optional: true
 
   '@types/estree@1.0.7': {}
+
+  console_font@1.0.2: {}
 
   esbuild@0.25.3:
     optionalDependencies:
