@@ -19,7 +19,7 @@ canvasctx.fillStyle = "black";
 canvasctx.fillRect(0, 0, canvas.width, canvas.height);
 
 // params
-const DELAY_BETWEEN_LINES_MS = 35; // Adjust for speed of animation (lower = faster)
+const DELAY_BETWEEN_LINES_MS = 45; // Adjust for speed of animation (lower = faster)
 
 // animate
 let animationFrameId = null;
