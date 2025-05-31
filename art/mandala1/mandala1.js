@@ -25,11 +25,14 @@ const NB_POINTS_PER_CIRLCE = 20;
 const DELAY_BETWEEN_LINES_MS = urlParams.get("anim_duration")
   ? Math.max(urlParams.get("anim_duration"), 10)
   : 35; // Adjust for speed of animation (lower = faster) // Adjust for speed of animation (lower = faster)
-console.log(DELAY_BETWEEN_LINES_MS);
 const middleX = canvas.width / 2;
 const middleY = canvas.height / 2;
 const heightWidthMax = Math.max(canvas.height, canvas.width);
 const heightWidthMin = Math.min(canvas.height, canvas.width);
+
+console.log(
+  "seems url param is here for a reason... Guess what anim_duration could do.. !"
+);
 
 // outer circle
 const outerCenterX = middleX;

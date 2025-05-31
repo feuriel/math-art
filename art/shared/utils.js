@@ -1,7 +1,3 @@
-export function sharedFunction() {
-  console.log("This function is shared between pages");
-}
-
 export function drawLine(fromPoint, toPoint, canvasctx) {
   canvasctx.beginPath();
   canvasctx.moveTo(fromPoint.x, fromPoint.y);
