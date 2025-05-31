@@ -5,7 +5,7 @@ import {
   setMenuCallbacks,
 } from "../shared/controls.js";
 
-const TITLE = "Inner Circle Focus (mandala1)";
+const TITLE = "Inner Circle Focus";
 const urlParams = new URLSearchParams(window.location.search);
 const canvas = document.getElementById("mandala1-canvas");
 const container = document.getElementById("canvas-container");

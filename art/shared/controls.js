@@ -67,7 +67,9 @@ export const setContentInfo = (container, title) => {
   infoPopup.appendChild(infoLinkOtherArt);
 
   let infoLinkRiel = document.createElement("a");
-  infoLinkRiel.href = "/art/";
+  infoLinkRiel.target = "_blank";
+  infoLinkRiel.rel = "noopener noreferrer";
+  infoLinkRiel.href = "https://gabriel-somogyi.vercel.app/";
   infoLinkRiel.innerText = "R Studio";
   infoPopup.appendChild(infoLinkRiel);
 };
