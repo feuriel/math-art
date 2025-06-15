@@ -12,6 +12,6 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "console_font": "^1.0.4"
+    "console_font": "^1.0.5"
   }
 }
