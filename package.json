@@ -13,5 +13,10 @@
   },
   "dependencies": {
     "console_font": "^1.0.5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
